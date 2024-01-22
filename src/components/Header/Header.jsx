@@ -1,10 +1,16 @@
 import { AppBar, Autocomplete, Box, Tab, Tabs, TextField, Toolbar } from '@mui/material'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieIcon from '@mui/icons-material/Movie';
 const dummyArray = ["Memory", "Brahmastra", "Forest grump"]
 
 function Header() {
     const [value, setValue] = useState(0);
+
+    useEffect(() => {
+        getAllMovies()
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+    }, []);
     return (
         <>
             <AppBar>
