@@ -1,19 +1,23 @@
 import { AppBar, Autocomplete, Box, Tab, Tabs, TextField, Toolbar } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import MovieIcon from '@mui/icons-material/Movie';
+import { getAllMovies } from '../../api_helpers/api_helpers';
 const dummyArray = ["Memory", "Brahmastra", "Forest grump"]
 
 function Header() {
     const [value, setValue] = useState(0);
+    const [movies, setMovies] = useState([]);
+    
 
     useEffect(() => {
         getAllMovies()
-            .then((data) => console.log(data))
+            .then((data) => setMovies(data.movies))
             .catch((err) => console.log(err));
     }, []);
+
     return (
         <>
-            <AppBar>
+            <AppBar sx={{ bgcolor: "#2b2d42" }}>
                 <Toolbar>
                     <Box width={'20%'}>
                         <MovieIcon />
@@ -21,8 +25,8 @@ function Header() {
                     <Box width={'50%'} margin={'auto'}>
                         <Autocomplete
                             freeSolo
-                            options={dummyArray.map((option) => option)}
-                            renderInput={(params) => <TextField variant='standard' {...params} label="Search Across Movies" />}
+                            options={movies && movies.map((option) => option)}
+                            renderInput={(params) => <TextField sx={{ input: { color: "white" } }} variant='standard' {...params} placeholder="Search Across Movies" />}
                         />
                     </Box>
                     <Box display={"flex"}>
