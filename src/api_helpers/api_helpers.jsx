@@ -17,7 +17,7 @@ export async function getAllMovies() {
 
 export async function sendUserAuthRequest(data, signup) {
     const res = await
-        axios.post(/user/${signup ? "signup" : "login"}, {
+        axios.post(`/user/${signup ? "signup" : "login"}`, {
             name: signup ? data.name : "",
             email: data.email,
             password: data.password
