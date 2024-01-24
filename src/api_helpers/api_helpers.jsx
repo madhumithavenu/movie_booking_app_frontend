@@ -79,7 +79,7 @@ export async function newBooking(data) {
 export async function getUserBooking() {
     const id = localStorage.getItem("userID");
     const res = await axios
-        .get(/user/bookings/${id})
+        .get(`/user/bookings/${id}`)
         .catch((err) => console.log(err));
 
     if (res.status !== 200) {
@@ -89,5 +89,16 @@ export async function getUserBooking() {
     return resData;
 };
 
+export async function deleteBooking(id) {
+    const res = await axios
+        .delete(`/booking/${id}`)
+        .catch((err) => console.log(err));
 
+    if (res.status !== 200) {
+        return console.log("Unepxected Error");
+    }
+
+    const resData = await res.data;
+    return resData;
+};
 
