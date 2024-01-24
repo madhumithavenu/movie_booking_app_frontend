@@ -16,17 +16,18 @@ export async function getAllMovies() {
 };
 
 export async function sendUserAuthRequest(data, signup) {
-    const res = await
-        axios.post(`/user/${signup ? "signup" : "login"}`, {
+    const res = await axios
+        .post(`/user/${signup ? "signup" : "login"}`, {
             name: signup ? data.name : "",
             email: data.email,
-            password: data.password
+            password: data.password,
         })
-            .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
 
     if (res.status !== 200 && res.status !== 201) {
-        return console.log("Unexpected Error Occured");
+        console.log("Unexpected Error Occurred");
     }
+
     const resData = await res.data;
     return resData;
 
@@ -45,6 +46,32 @@ export async function sendAdminAuthRequest(data) {
         return console.log("Unexpectyed Error");
     }
 
+    const resData = await res.data;
+    return resData;
+};
+
+export async function getMovieDetails(id) {
+    const res = await axios.get(`/movie/${id}`).catch((err) => console.log(err));
+    if (res.status !== 200) {
+        return console.log("Unexpected Error");
+    }
+    const resData = await res.data;
+    return resData;
+};
+
+export async function newBooking(data) {
+    const res = await axios
+        .post("/booking", {
+            movie: data.movie,
+            seatNumber: data.seatNumber,
+            date: data.date,
+            user: localStorage.getItem("userID"),
+        })
+        .catch((err) => console.log(err));
+
+    if (res.status !== 201) {
+        return console.log("Unexpected Error");
+    }
     const resData = await res.data;
     return resData;
 };

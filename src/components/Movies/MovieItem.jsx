@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import React from 'react'
 import { Link } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ function MovieItem(props) {
                     variant="contained"
                     fullWidth
                     LinkComponent={Link}
-                    to={/booking/}
+                    to={`/booking/${props.id}`}
                     sx={{
                         margin: "auto",
                         bgcolor: "#2b2d42",
